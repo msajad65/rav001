@@ -111,33 +111,17 @@ def _mirror_leech(bot, message, isZip=False, extract=False, isQbit=False, isLeec
                 link = file_.get_file().file_path
 
     if not is_url(link) and not is_magnet(link):
-        help_msg = "<b>Send link along with command line:</b>"
+        help_msg = "<b>از راهنمای زیر استفاده کنید:</b>"
         if isQbit:
-            help_msg += "\n<code>/qbcmd</code> {link} pswd: xx [zip/unzip]"
-            help_msg += "\n\n<b>By replying to link/file:</b>"
-            help_msg += "\n<code>/qbcmd</code> pswd: xx [zip/unzip]"
-            help_msg += "\n\n<b>Bittorrent selection:</b>"
-            help_msg += "\n<code>/qbcmd</code> <b>s</b> {link} or by replying to {file/link}"
-            help_msg += "\n\n<b>Qbittorrent seed</b>:"
-            help_msg += "\n<code>/qbcmd</code> <b>d</b> {link} or by replying to {file/link}.\n"
-            help_msg += "To specify ratio and seed time. Ex: d:0.7:10 (ratio and time) or d:0.7 "
-            help_msg += "(only ratio) or d::10 (only time) where time in minutes"
-            help_msg += "\n\n<b>Multi links only by replying to first link/file:</b>"
-            help_msg += "\n<code>/qbcmd</code> 10(number of links/files)"
-        else:
-            help_msg += "\n<code>/cmd</code> {link} |newname pswd: xx [zip/unzip]"
-            help_msg += "\n\n<b>By replying to link/file:</b>"
-            help_msg += "\n<code>/cmd</code> |newname pswd: xx [zip/unzip]"
-            help_msg += "\n\n<b>Direct link authorization:</b>"
-            help_msg += "\n<code>/cmd</code> {link} |newname pswd: xx\nusername\npassword"
-            help_msg += "\n\n<b>Bittorrent selection:</b>"
-            help_msg += "\n<code>/cmd</code> <b>s</b> {link} or by replying to {file/link}"
-            help_msg += "\n\n<b>Bittorrent seed</b>:"
-            help_msg += "\n<code>/cmd</code> <b>d</b> {link} or by replying to {file/link}.\n"
-            help_msg += "To specify ratio and seed time. Ex: d:0.7:10 (ratio and time) or d:0.7 "
-            help_msg += "(only ratio) or d::10 (only time) where time in minutes"
-            help_msg += "\n\n<b>Multi links only by replying to first link/file:</b>"
-            help_msg += "\n<code>/cmd</code> 10(number of links/files)"
+        help_msg = "<b>لینک خود را به همراه دستور موردنظر ارسال کنید مثلا:</b>"
+        help_msg += "\n<code>/mirror</code> https://test.com/test.mkv"
+        help_msg += "\n\n<b> یا میتوانید لینک یا فایل را فرستاده و روی آن دستور موردنظر را ریپلای کنید:</b>"
+        help_msg += "\n\n<b>برای لینک مستقیم دارای پسورد از دستور زیر استفاده کنید:</b>"
+        help_msg += "\n<<code>/mirror</code> OR <code>/leech</code> {لینک} pswd: xx\nusername\npassword"
+        help_msg += "\n\n<b>انتخاب محتویات داخل تورنت با دستور:</b>"
+        help_msg += "\n<code>/qbmirror</code> <b>s</b>"
+        help_msg += "\n\n<b>اگر میخواهید اسم فایل را تغییر دهید از دستور زیر استفاده کنید:</b>"
+        help_msg += "\n<code>/mirror</code> OR <code>/leech</code> |newname.mp4"
         return sendMessage(help_msg, bot, message)
 
     LOGGER.info(link)
@@ -158,9 +142,9 @@ def _mirror_leech(bot, message, isZip=False, extract=False, isQbit=False, isLeec
 
     if is_gdrive_link(link):
         if not isZip and not extract and not isLeech:
-            gmsg = f"Use /{BotCommands.CloneCommand} to clone Google Drive file/folder\n\n"
-            gmsg += f"Use /{BotCommands.ZipMirrorCommand[0]} to make zip of Google Drive folder\n\n"
-            gmsg += f"Use /{BotCommands.UnzipMirrorCommand[0]} to extracts Google Drive archive folder/file"
+            gmsg = f"از دستور /{BotCommands.CloneCommand} برای کپی کردن فایل/پوشه گوگل درایو استفاده کنید\n\n"
+            gmsg += f"از دستور /{BotCommands.ZipMirrorCommand} برای زیپ کردن پوشه گوگل درایو استفاده کنید\n\n"
+            gmsg += f"از دستور /{BotCommands.UnzipMirrorCommand} برای استخراج فایل بایگانی (فشرده) گوگل درایو استفاده کنید"
             sendMessage(gmsg, bot, message)
         else:
             Thread(target=add_gd_download, args=(link, f'{DOWNLOAD_DIR}{listener.uid}', listener, name)).start()
