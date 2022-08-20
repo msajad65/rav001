@@ -122,8 +122,8 @@ def get_readable_message():
                 globals()['COUNT'] -= STATUS_LIMIT
                 globals()['PAGE_NO'] -= 1
         for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
-            msg += f"<b><a href='{download.message.link}'>{download.status()}</a>: </b>"
-            msg += f"<code>{escape(str(download.name()))}</code>"
+            msg += f"<b>📁نام فایل:</b> <code>{escape(str(download.name()))}</code>"
+            msg += f"\n<b>📊وضعیت:</b> <i>{download.status()}</i>"
             if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
                 msg += f"\n{get_progress_bar_string(download)} {download.progress()}"
                 msg += f"\n<b>🔻مقدار دانلود شده:</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
@@ -141,7 +141,7 @@ def get_readable_message():
                 msg += f" | <b>🕓زمان: </b>{download.seeding_time()}"
             else:
                 msg += f"\n<b>💾حجم: </b>{download.size()}"
-            msg += f"\n<code>/{BotCommands.CancelMirror} {download.gid()}</code>"
+            msg += f"\n❌کنسل کردن: <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
             msg += "\n\n"
             if STATUS_LIMIT is not None and index == STATUS_LIMIT:
                 break
