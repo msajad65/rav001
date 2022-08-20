@@ -43,7 +43,7 @@ def _clone(message, bot):
             LOGGER.info('Checking File/Folder if already in Drive...')
             cap, f_name = gd.drive_list(name, True, True)
             if cap:
-                cap = f"File/Folder is already available in Drive. Here are the search results:\n\n{cap}"
+                cap = f"‼️ فایل یا پوشه موردنظر از قبل در درایو ما موجود است. در اینجا نتایج جستجو قابل مشاهده است:\n\n{cap}"
                 sendFile(bot, message, f_name, cap)
                 return
         if multi > 1:
@@ -84,7 +84,7 @@ def _clone(message, bot):
             sendMarkup(result + cc, bot, message, button)
             LOGGER.info(f'Cloning Done: {name}')
     else:
-        sendMessage("Send Gdrive link along with command or by replying to the link by command\n\n<b>Multi links only by replying to first link/file:</b>\n<code>/cmd</code> 10(number of links/files)", bot, message)
+        sendMessage("لینک Gdrive را همراه با دستور یا با پاسخ دادن به آن با دستور clone/ ارسال کنید", bot, message)
 
 @new_thread
 def cloneNode(update, context):
