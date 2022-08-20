@@ -193,7 +193,7 @@ class YoutubeDLHelper:
         self.__is_cancelled = True
         LOGGER.info(f"Cancelling Download: {self.name}")
         if not self.__downloading:
-            self.__onDownloadError("Download Cancelled by User!")
+            self.__onDownloadError("دانلود توسط کاربر متوقف شد!")
 
     def __set_args(self, args):
         args = args.split('|')
