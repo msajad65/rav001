@@ -122,6 +122,20 @@ def _mirror_leech(bot, message, isZip=False, extract=False, isQbit=False, isLeec
         help_msg += "\n<code>/qbmirror</code> <b>s</b>"
         help_msg += "\n\n<b>اگر میخواهید اسم فایل را تغییر دهید از دستور زیر استفاده کنید:</b>"
         help_msg += "\n<code>/mirror</code> OR <code>/leech</code> |newname.mp4"
+        else:
+            help_msg += "\n<code>/cmd</code> {link} |newname pswd: xx [zip/unzip]"
+            help_msg += "\n\n<b>By replying to link/file:</b>"
+            help_msg += "\n<code>/cmd</code> |newname pswd: xx [zip/unzip]"
+            help_msg += "\n\n<b>Direct link authorization:</b>"
+            help_msg += "\n<code>/cmd</code> {link} |newname pswd: xx\nusername\npassword"
+            help_msg += "\n\n<b>Bittorrent selection:</b>"
+            help_msg += "\n<code>/cmd</code> <b>s</b> {link} or by replying to {file/link}"
+            help_msg += "\n\n<b>Bittorrent seed</b>:"
+            help_msg += "\n<code>/cmd</code> <b>d</b> {link} or by replying to {file/link}.\n"
+            help_msg += "To specify ratio and seed time. Ex: d:0.7:10 (ratio and time) or d:0.7 "
+            help_msg += "(only ratio) or d::10 (only time) where time in minutes"
+            help_msg += "\n\n<b>Multi links only by replying to first link/file:</b>"
+            help_msg += "\n<code>/cmd</code> 10(number of links/files)"
         return sendMessage(help_msg, bot, message)
 
     LOGGER.info(link)
