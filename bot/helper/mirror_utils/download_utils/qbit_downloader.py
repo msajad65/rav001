@@ -42,12 +42,12 @@ class QbDownloader:
                             break
                         elif time() - self.__stalled_time >= 12:
                             self.client.torrents_delete_tags(tags=self.__listener.uid)
-                            msg = "This Torrent already added or not a torrent. If something wrong please report."
+                            msg = "‼️ این تورنت قبلاً اضافه شده یا اصلا تورنت نیست. اگر مشکلی وجود دارد لطفا به مدیران گزارش دهید."
                             sendMessage(msg, self.__listener.bot, self.__listener.message)
                             self.client.auth_log_out()
                             return
             else:
-                sendMessage("This is an unsupported/invalid link.", self.__listener.bot, self.__listener.message)
+                sendMessage("‼️ این یک پیوند پشتیبانی نشده یا نامعتبر است.", self.__listener.bot, self.__listener.message)
                 self.client.auth_log_out()
                 return
             tor_info = tor_info[0]
@@ -60,7 +60,7 @@ class QbDownloader:
             self.__periodic = setInterval(self.POLLING_INTERVAL, self.__qb_listener)
             if BASE_URL is not None and select:
                 if link.startswith('magnet:'):
-                    metamsg = "Downloading Metadata, wait then you can select files. Use torrent file to avoid this wait."
+                    metamsg = "در حال دانلود متادیتا، صبر کنید سپس می توانید فایل ها را انتخاب کنید. برای جلوگیری از این انتظار از فایل تورنت استفاده کنید."
                     meta = sendMessage(metamsg, self.__listener.bot, self.__listener.message)
                     while True:
                         tor_info = self.client.torrents_info(torrent_hashes=self.ext_hash)
@@ -76,7 +76,7 @@ class QbDownloader:
                             return deleteMessage(self.__listener.bot, meta)
                 self.client.torrents_pause(torrent_hashes=self.ext_hash)
                 SBUTTONS = bt_selection_buttons(self.ext_hash)
-                msg = "Your download paused. Choose files then press Done Selecting button to start downloading."
+                msg = "دانلود شما متوقف شد. فایل ها را انتخاب کنید سپس دکمه Done Selecting را فشار دهید تا دانلود شروع شود."
                 sendMarkup(msg, self.__listener.bot, self.__listener.message, SBUTTONS)
             else:
                 sendStatusMessage(self.__listener.message, self.__listener.bot)
@@ -109,8 +109,8 @@ class QbDownloader:
                     if qbname is not None:
                         cap, f_name = GoogleDriveHelper().drive_list(qbname, True)
                         if cap:
-                            self.__onDownloadError("File/Folder is already available in Drive.")
-                            cap = f"Here are the search results:\n\n{cap}"
+                            self.__onDownloadError("‼️ فایل یا پوشه موردنظر از قبل در درایو ما موجود است")
+                            cap = f"نتایج جستجو در اینجا قابل مشاهده است:\n\n{cap}"
                             sendFile(self.__listener.bot, self.__listener.message, f_name, cap)
                     self.__stopDup_check = True
             elif tor_info.state == "stalledDL":
@@ -174,4 +174,4 @@ class QbDownloader:
             LOGGER.info(f"Cancelling Seed: {self.__name}")
             self.client.torrents_pause(torrent_hashes=self.ext_hash)
         else:
-            self.__onDownloadError('Download stopped by user!')
+            self.__onDownloadError('دانلود توسط کاربر متوقف شد!')
