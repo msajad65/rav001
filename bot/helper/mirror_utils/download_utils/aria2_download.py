@@ -18,7 +18,7 @@ def __onDownloadStarted(api, gid):
         if dl := getDownloadByGid(gid):
             listener = dl.listener()
             if listener.select:
-                metamsg = "Downloading Metadata, wait then you can select files. Use torrent file to avoid this wait."
+                metamsg = "در حال دانلود متادیتا، صبر کنید سپس می توانید فایل ها را انتخاب کنید. برای جلوگیری از این انتظار از فایل تورنت استفاده کنید."
                 meta = sendMessage(metamsg, listener.bot, listener.message)
                 while True:
                     if download.is_removed or download.followed_by_ids:
@@ -51,9 +51,9 @@ def __onDownloadStarted(api, gid):
                 if sname is not None:
                     cap, f_name = GoogleDriveHelper().drive_list(sname, True)
                     if cap:
-                        listener.onDownloadError('File/Folder already available in Drive.')
+                        listener.onDownloadError('‼️فایل یا پوشه موردنظر از قبل در درایو ما موجود است.')
                         api.remove([download], force=True, files=True)
-                        cap = f"Here are the search results:\n\n{cap}"
+                        cap = f"نتایج جستجو در اینجا قابل مشاهده است:\n\n{cap}"
                         sendFile(listener.bot, listener.message, f_name, cap)
                         return
     except Exception as e:
@@ -73,7 +73,7 @@ def __onDownloadComplete(api, gid):
             if BASE_URL is not None and listener.select:
                 api.client.force_pause(new_gid)
                 SBUTTONS = bt_selection_buttons(new_gid)
-                msg = "Your download paused. Choose files then press Done Selecting button to start downloading."
+                msg = "دانلود شما متوقف شد. فایل ها را انتخاب کنید سپس دکمه Done Selecting را فشار دهید تا دانلود شروع شود."
                 sendMarkup(msg, listener.bot, listener.message, SBUTTONS)
     elif download.is_torrent:
         if dl := getDownloadByGid(gid):
