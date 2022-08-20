@@ -96,18 +96,18 @@ class TelegramDownloadHelper:
                     LOGGER.info('Checking File/Folder if already in Drive...')
                     cap, f_name = GoogleDriveHelper().drive_list(name, True, True)
                     if cap:
-                        cap = f"File/Folder is already available in Drive. Here are the search results:\n\n{cap}"
+                        cap = f"‼️ فایل یا پوشه موردنظر از قبل در درایو ما موجود است.\nدر اینجا نتایج جستجو قابل مشاهده است:\n\n{cap}"
                         sendFile(self.__listener.bot, self.__listener.message, f_name, cap)
                         return
                 self.__onDownloadStart(name, size, media.file_unique_id)
                 LOGGER.info(f'Downloading Telegram file with id: {media.file_unique_id}')
                 self.__download(_dmsg, path)
             else:
-                self.__onDownloadError('File already being downloaded!')
+                self.__onDownloadError('‼️ فایل قبلا دانلود شده است!')
         else:
-            self.__onDownloadError('No document in the replied message')
+            self.__onDownloadError('‼️ هیچ فایلی در پیام ریپلی شده وجود ندارد!')
 
     def cancel_download(self):
         LOGGER.info(f'Cancelling download on user request: {self.__id}')
         self.__is_cancelled = True
-        self.__onDownloadError('Cancelled by user!')
+        self.__onDownloadError('دانلود توسط کاربر متوقف شد!')
