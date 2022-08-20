@@ -55,7 +55,7 @@ def select(update, context):
         return
 
     SBUTTONS = bt_selection_buttons(id_)
-    msg = "Your download paused. Choose files then press Done Selecting button to resume downloading."
+    msg = "دانلود شما متوقف شد. فایل ها را انتخاب کنید سپس دکمه Done Selecting را فشار دهید تا دانلود از سر گرفته شود."
     sendMarkup(msg, context.bot, update.message, SBUTTONS)
 
 def get_confirm(update, context):
@@ -65,12 +65,12 @@ def get_confirm(update, context):
     data = data.split()
     dl = getDownloadByGid(data[2])
     if not dl:
-        query.answer(text="This task has been cancelled!", show_alert=True)
+        query.answer(text="این عملیات متوقف شد", show_alert=True)
         query.message.delete()
         return
     listener = dl.listener()
     if user_id != listener.message.from_user.id:
-        query.answer(text="This task is not for you!", show_alert=True)
+        query.answer(text="این عملیات برای شما نیست!", show_alert=True)
     elif data[1] == "pin":
         query.answer(text=data[3], show_alert=True)
     elif data[1] == "done":
