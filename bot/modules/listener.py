@@ -215,7 +215,7 @@ class MirrorLeechListener:
     def onUploadComplete(self, link: str, size, files, folders, typ, name):
         if not self.isPrivate and INCOMPLETE_TASK_NOTIFIER and DB_URI is not None:
             DbManger().rm_complete_task(self.message.link)
-        msg = f"<b>💠اسم فایل: </b><code>{escape(name)}</code>\n\n<b>Size: </b>{size}"
+        msg = f"<b>💠اسم فایل: </b><code>{escape(name)}</code>\n<b>💠حجم: </b>{size}"
         if self.isLeech:
             msg += f'\n<b>💠کل فایلها: </b>{folders}'
             if typ != 0:
