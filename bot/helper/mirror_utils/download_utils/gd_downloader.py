@@ -26,7 +26,7 @@ def add_gd_download(link, path, listener, newname):
         if gname is not None:
             cap, f_name = GoogleDriveHelper().drive_list(gname, True)
             if cap:
-                cap = f"File/Folder is already available in Drive. Here are the search results:\n\n{cap}"
+                cap = f"‼️فایل یا پوشه موردنظر از قبل در درایو ما موجود است. نتایج جستجو در زیر قابل مشاهده است\n\n{cap}"
                 sendFile(listener.bot, listener.message, f_name, cap)
                 return
     LOGGER.info(f"Download Name: {name}")
