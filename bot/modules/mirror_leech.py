@@ -111,33 +111,24 @@ def _mirror_leech(bot, message, isZip=False, extract=False, isQbit=False, isLeec
                 link = file_.get_file().file_path
 
     if not is_url(link) and not is_magnet(link):
-        help_msg = "<b>Send link along with command line:</b>"
+        help_msg = "<b>دستورات را به روش زیر ارسال کنید</b>"
         if isQbit:
-            help_msg += "\n<code>/qbcmd</code> {link} pswd: xx [zip/unzip]"
-            help_msg += "\n\n<b>By replying to link/file:</b>"
-            help_msg += "\n<code>/qbcmd</code> pswd: xx [zip/unzip]"
-            help_msg += "\n\n<b>Bittorrent selection:</b>"
-            help_msg += "\n<code>/qbcmd</code> <b>s</b> {link} or by replying to {file/link}"
-            help_msg += "\n\n<b>Qbittorrent seed</b>:"
-            help_msg += "\n<code>/qbcmd</code> <b>d</b> {link} or by replying to {file/link}.\n"
-            help_msg += "To specify ratio and seed time. Ex: d:0.7:10 (ratio and time) or d:0.7 "
-            help_msg += "(only ratio) or d::10 (only time) where time in minutes"
-            help_msg += "\n\n<b>Multi links only by replying to first link/file:</b>"
-            help_msg += "\n<code>/qbcmd</code> 10(number of links/files)"
+            help_msg += "\n<b>دستوراتی که با qb شروع میشوند فقط مخصوص تورنت میباشند</b>"
+            help_msg += "\n\n<b>تورنت خود را به همراه دستور موردنظر ارسال کنید مثلا:</b>"
+            help_msg += "\n<code>/qbmirror</code> magnet:?xt=urn:btih:8AC6325A87FE38BE371CB79AFD4315BACCDD2B12"
+            help_msg += "\n<b>یا فایل تورنت را فرستاده و روی آن ریپلای کنید و دستور را بفرستید</b>"
+            help_msg += "\n\n<b>انتخاب محتویات داخل تورنت با دستور زیر:</b>"
+            help_msg += "\n<code>/qbmirror</code> <b>s</b>"
+            help_msg += "\n<b>راهنمای کامل و جامع دستورات : https://t.me/ravenleech/14</b>"
         else:
-            help_msg += "\n<code>/cmd</code> {link} |newname pswd: xx [zip/unzip]"
-            help_msg += "\n\n<b>By replying to link/file:</b>"
-            help_msg += "\n<code>/cmd</code> |newname pswd: xx [zip/unzip]"
-            help_msg += "\n\n<b>Direct link authorization:</b>"
+            help_msg += "\n<b>لینک خود را به همراه دستور موردنظر ارسال کنید مثلا:</b>"
+            help_msg += "\n<code>/mirror</code> <b>https://test.com/test.mkv</b>"
+            help_msg += "\n<b>یا فایل را فرستاده و روی آن ریپلای کنید و دستور را بفرستید</b>"
+            help_msg += "\n\n<b>برای لینک مستقیم دارای پسورد از دستور زیر استفاده کنید:</b>"
             help_msg += "\n<code>/cmd</code> {link} |newname pswd: xx\nusername\npassword"
-            help_msg += "\n\n<b>Bittorrent selection:</b>"
-            help_msg += "\n<code>/cmd</code> <b>s</b> {link} or by replying to {file/link}"
-            help_msg += "\n\n<b>Bittorrent seed</b>:"
-            help_msg += "\n<code>/cmd</code> <b>d</b> {link} or by replying to {file/link}.\n"
-            help_msg += "To specify ratio and seed time. Ex: d:0.7:10 (ratio and time) or d:0.7 "
-            help_msg += "(only ratio) or d::10 (only time) where time in minutes"
-            help_msg += "\n\n<b>Multi links only by replying to first link/file:</b>"
-            help_msg += "\n<code>/cmd</code> 10(number of links/files)"
+            help_msg += "\n\n<b>اگر میخواهید اسم فایل را تغییر دهید از دستور زیر استفاده کنید:</b>"
+            help_msg += "\n<code>/mirror</code> OR <code>/leech</code> |newname.mp4"
+            help_msg += "\n\n<b>راهنمای کامل و جامع دستورات : https://t.me/ravenleech/14</b>"
         return sendMessage(help_msg, bot, message)
 
     LOGGER.info(link)
