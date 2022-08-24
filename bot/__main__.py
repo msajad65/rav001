@@ -63,17 +63,17 @@ def stats(update, context):
 
 def start(update, context):
     buttons = ButtonMaker()
-    buttons.buildbutton("Repo", "https://www.github.com/anasty17/mirror-leech-telegram-bot")
-    buttons.buildbutton("Owner", "https://www.github.com/anasty17")
+    buttons.buildbutton("کانال ما", "https://t.me/ravenleech")
+    buttons.buildbutton("گروه ما", "https://t.me/+wuXRqozHVpFkY2U5")
     reply_markup = buttons.build_menu(2)
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
-This bot can mirror all your links to Google Drive or to telegram!
-Type /{BotCommands.HelpCommand} to get a list of available commands
+این ربات می تواند تمام لینک های شما را مستقیم یا در تلگرام آپلود کند!
+برای اینکار در گروه عضو شوید
 '''
         sendMarkup(start_string, context.bot, update.message, reply_markup)
     else:
-        sendMarkup('Not an Authorized user, deploy your own mirror-leech bot', context.bot, update.message, reply_markup)
+        sendMarkup('کاربر مجاز شناسایی نشد! برای استفاده از ربات در گروه ما عضو شوید', context.bot, update.message, reply_markup)
 
 def restart(update, context):
     restart_message = sendMessage("Restarting...", context.bot, update.message)
@@ -164,7 +164,7 @@ def main():
                         chat_id, msg_id = map(int, f)
                     msg = 'Restarted Successfully!'
                 else:
-                    msg = 'ربات ریستارت شد!'
+                    msg = 'Bot Restarted!'
                 for tag, links in data.items():
                      msg += f"\n\n{tag}: "
                      for index, link in enumerate(links, start=1):
